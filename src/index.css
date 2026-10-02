@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Alexandria', sans-serif;
+    --font-sans: 'IBM Plex Sans Arabic', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  .font-mono-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Glassmorphism Surface Architecture */
+.glass-surface {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(15, 23, 42, 0.56) 100%
+  );
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 24px 60px -15px rgba(2, 6, 23, 0.65);
+}
+
+.glass-surface-elevated {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(15, 23, 42, 0.68) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 32px 72px -16px rgba(2, 6, 23, 0.78);
+}
+
+.glass-header {
+  background: rgba(10, 14, 28, 0.62);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.glass-input {
+  background: rgba(10, 14, 28, 0.52);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-input:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-color: rgba(251, 191, 36, 0.75);
+}
+
+/* Compositor-only supernatural aurora drift */
+@keyframes auroraDriftOne {
+  0%, 100% {
+    transform: translate3d(0px, 0px, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(-60px, 45px, 0) scale(1.12) rotate(8deg);
+  }
+  66% {
+    transform: translate3d(45px, -35px, 0) scale(0.94) rotate(-6deg);
+  }
+}
+
+@keyframes auroraDriftTwo {
+  0%, 100% {
+    transform: translate3d(0px, 0px, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(75px, -55px, 0) scale(1.15) rotate(-12deg);
+  }
+}
+
+@keyframes pulseAura {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+  }
+}
+
+.animate-aurora-1 {
+  animation: auroraDriftOne 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-aurora-2 {
+  animation: auroraDriftTwo 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-pulse-aura {
+  animation: pulseAura 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Accessibility & Reduced Motion / Reduced Transparency Fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface,
+  .glass-surface-elevated,
+  .glass-header,
+  .glass-input {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #111827 !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+  }
+}
+
+/* Manual user toggle class for Reduced Motion & Solid Contrast Fallback */
+.a11y-solid-mode .glass-surface,
+.a11y-solid-mode .glass-surface-elevated,
+.a11y-solid-mode .glass-header,
+.a11y-solid-mode .glass-input {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #0f172a !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.a11y-solid-mode .animate-aurora-1,
+.a11y-solid-mode .animate-aurora-2,
+.a11y-solid-mode .animate-pulse-aura {
+  animation: none !important;
+}
+

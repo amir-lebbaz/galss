@@ -1,0 +1,6 @@
+{
+  "name": "أثير بلس — الاشتراكات الرقمية والمنشورات التقنية",
+  "description": "منصة متخصصة لبيع الاشتراكات الرقمية الأصلية بتفعيل فوري، مع مدونة تقنية ومنصة تواصل مباشر بتصميم زجاجي تفاعلي.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
